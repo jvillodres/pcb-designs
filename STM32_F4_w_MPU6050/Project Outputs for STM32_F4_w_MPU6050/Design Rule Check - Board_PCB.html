@@ -1,0 +1,771 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD26\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">9/09/2026</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">3:54:06 a. m.</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:00</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc" class="file"><acronym title="C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc">C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">145</td></tr>
+</table>
+</td>
+</table><a name="IDKXGAUMLICRRXLPG4QJAE0VKTJLCTXLGC3YLKA3MRO0F2UEBLVETK"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID3AR45TTLJAB4OKTZIFPGRKEU0O0ZBHDF1KT43RDO3PSFBM1REXDC">Clearance Constraint (Gap=0.15mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDGH3DP1G5YI2RD0ETY0SKBTW04L2ZRIDKE5I1HHNLPCNOYOFPAL2H">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDRKQEXQ1GMDLTKHMF4SXVV1JS1DJUMJAIFMHM3JENU4D2KB1E10OI">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID2DPOVXNLY3HVEKHMCUS12GZQCEM3EO02W0DMGPCXBH0SUEGGZRDJ">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDFSOOJ5UZ5XQDFCQ4D41OSSPLHOLILOACV5G3RMM02VKJB1CCATJL">Width Constraint (Min=0.2mm) (Max=1mm) (Preferred=0.3mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDPPRBPDMBEKO4DWH2PFF3HTPTOCTF1PNAWLXAPGEFSPWQ3Q2JMTF">Routing Topology Rule(Topology=Shortest) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDIC4SMKWWEUKMKWZD5FYRCFJVXNOSEZYQG0Q25HPVEEABO4PSOTGB">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID0T1FUGWMF3ILCMNQPZ5ESLJESHQTRV01XUTAIFHYHDKS3WQVYWNI">Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDH4YX2NPBHGSHKICCJUU3XDLJEMUQISX4W5CZTEDAL5EZB50XHVUN">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDXMNMPFU0AFQOF1220ZK53Z1BOCKITVZSERCQMZCHGL4FQUSFPLYD">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">141</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDTZP04LNXBNEHLVKDO1Y33RNV2D2DAJUCYAE5LXKOORZKCKZHNOCM">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</a></td>
+<td class="column2">4</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDJ0M13OUV302ACVPDC4KKWXIG0GI341YQRLP4HHJA01D5A4TPFXPH">Silk to Silk (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDDLALKQXACFSWGW0UZFOZYJOXFJPHEBUWHBVVZHG0RFU4LIKPPNZB">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDM0POLIS1BQUCFFRE2VLSWJBTTLK2ANYNK0L5RUDMS3YG5TZQFKUO">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">145</td>
+</tr>
+</table><br><a name="IDXMNMPFU0AFQOF1220ZK53Z1BOCKITVZSERCQMZCHGL4FQUSFPLYD"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4447.131mil|Location2.X=4458.381mil|Location1.Y=2234.532mil|Location2.Y=2245.782mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4447.131mil|Location2.X=4458.381mil|Location1.Y=2234.532mil|Location2.Y=2245.782mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1mm &lt; 0.254mm) Between Pad D1-1(31.05mm,5.2mm) on L1 (Signal) And Pad D1-2(31.05mm,6.1mm) on L1 (Signal) [Top Solder] Mask Sliver [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4082.958mil|Location2.X=4094.208mil|Location1.Y=2573.115mil|Location2.Y=2584.365mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4082.958mil|Location2.X=4094.208mil|Location1.Y=2573.115mil|Location2.Y=2584.365mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1mm &lt; 0.254mm) Between Pad D2-1(22.55mm,13.95mm) on L1 (Signal) And Pad D2-2(21.65mm,13.95mm) on L1 (Signal) [Top Solder] Mask Sliver [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4435.32mil|Location2.X=4446.57mil|Location1.Y=2700.084mil|Location2.Y=2711.334mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4435.32mil|Location2.X=4446.57mil|Location1.Y=2700.084mil|Location2.Y=2711.334mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad J1-1(31.74mm,17.15mm) on L1 (Signal) And Pad J1-2(31.74mm,17.8mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4435.32mil|Location2.X=4446.57mil|Location1.Y=2673.509mil|Location2.Y=2684.759mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4435.32mil|Location2.X=4446.57mil|Location1.Y=2673.509mil|Location2.Y=2684.759mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad J1-1(31.74mm,17.15mm) on L1 (Signal) And Pad J1-6(31.825mm,15.963mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4435.32mil|Location2.X=4446.57mil|Location1.Y=2725.674mil|Location2.Y=2736.924mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4435.32mil|Location2.X=4446.57mil|Location1.Y=2725.674mil|Location2.Y=2736.924mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad J1-2(31.74mm,17.8mm) on L1 (Signal) And Pad J1-3(31.74mm,18.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4435.32mil|Location2.X=4446.57mil|Location1.Y=2751.265mil|Location2.Y=2762.515mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4435.32mil|Location2.X=4446.57mil|Location1.Y=2751.265mil|Location2.Y=2762.515mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad J1-3(31.74mm,18.45mm) on L1 (Signal) And Pad J1-4(31.74mm,19.1mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4435.32mil|Location2.X=4446.57mil|Location1.Y=2776.855mil|Location2.Y=2788.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4435.32mil|Location2.X=4446.57mil|Location1.Y=2776.855mil|Location2.Y=2788.105mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad J1-4(31.74mm,19.1mm) on L1 (Signal) And Pad J1-5(31.74mm,19.75mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4435.32mil|Location2.X=4446.57mil|Location1.Y=2803.43mil|Location2.Y=2814.68mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4435.32mil|Location2.X=4446.57mil|Location1.Y=2803.43mil|Location2.Y=2814.68mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad J1-5(31.74mm,19.75mm) on L1 (Signal) And Pad J1-7(31.825mm,20.938mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.265mil|Location2.X=3762.515mil|Location1.Y=2787.682mil|Location2.Y=2798.932mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.265mil|Location2.X=3762.515mil|Location1.Y=2787.682mil|Location2.Y=2798.932mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-1(13.4mm,19.95mm) on L1 (Signal) And Pad U2-2(13.4mm,19.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3760.123mil|Location2.X=3771.373mil|Location1.Y=2797.525mil|Location2.Y=2808.775mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3760.123mil|Location2.X=3771.373mil|Location1.Y=2797.525mil|Location2.Y=2808.775mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-1(13.4mm,19.95mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.265mil|Location2.X=3762.515mil|Location1.Y=2610.517mil|Location2.Y=2621.767mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.265mil|Location2.X=3762.515mil|Location1.Y=2610.517mil|Location2.Y=2621.767mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-10(13.4mm,15.45mm) on L1 (Signal) And Pad U2-11(13.4mm,14.95mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3760.123mil|Location2.X=3771.373mil|Location1.Y=2620.359mil|Location2.Y=2631.609mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3760.123mil|Location2.X=3771.373mil|Location1.Y=2620.359mil|Location2.Y=2631.609mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-10(13.4mm,15.45mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.265mil|Location2.X=3762.515mil|Location1.Y=2630.202mil|Location2.Y=2641.452mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.265mil|Location2.X=3762.515mil|Location1.Y=2630.202mil|Location2.Y=2641.452mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-10(13.4mm,15.45mm) on L1 (Signal) And Pad U2-9(13.4mm,15.95mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.265mil|Location2.X=3762.515mil|Location1.Y=2590.832mil|Location2.Y=2602.082mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.265mil|Location2.X=3762.515mil|Location1.Y=2590.832mil|Location2.Y=2602.082mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-11(13.4mm,14.95mm) on L1 (Signal) And Pad U2-12(13.4mm,14.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3760.123mil|Location2.X=3771.373mil|Location1.Y=2600.674mil|Location2.Y=2611.924mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3760.123mil|Location2.X=3771.373mil|Location1.Y=2600.674mil|Location2.Y=2611.924mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-11(13.4mm,14.95mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3760.123mil|Location2.X=3771.373mil|Location1.Y=2580.989mil|Location2.Y=2592.239mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3760.123mil|Location2.X=3771.373mil|Location1.Y=2580.989mil|Location2.Y=2592.239mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-12(13.4mm,14.45mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3775.871mil|Location2.X=3787.121mil|Location1.Y=2544.572mil|Location2.Y=2555.822mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3775.871mil|Location2.X=3787.121mil|Location1.Y=2544.572mil|Location2.Y=2555.822mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-13(14.05mm,13.8mm) on L1 (Signal) And Pad U2-14(14.55mm,13.8mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3766.029mil|Location2.X=3777.279mil|Location1.Y=2575.084mil|Location2.Y=2586.334mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3766.029mil|Location2.X=3777.279mil|Location1.Y=2575.084mil|Location2.Y=2586.334mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-13(14.05mm,13.8mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3795.556mil|Location2.X=3806.806mil|Location1.Y=2544.572mil|Location2.Y=2555.822mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3795.556mil|Location2.X=3806.806mil|Location1.Y=2544.572mil|Location2.Y=2555.822mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-14(14.55mm,13.8mm) on L1 (Signal) And Pad U2-15(15.05mm,13.8mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3785.714mil|Location2.X=3796.964mil|Location1.Y=2575.084mil|Location2.Y=2586.334mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3785.714mil|Location2.X=3796.964mil|Location1.Y=2575.084mil|Location2.Y=2586.334mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-14(14.55mm,13.8mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3815.241mil|Location2.X=3826.491mil|Location1.Y=2544.572mil|Location2.Y=2555.822mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3815.241mil|Location2.X=3826.491mil|Location1.Y=2544.572mil|Location2.Y=2555.822mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-15(15.05mm,13.8mm) on L1 (Signal) And Pad U2-16(15.55mm,13.8mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3805.399mil|Location2.X=3816.649mil|Location1.Y=2575.084mil|Location2.Y=2586.334mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3805.399mil|Location2.X=3816.649mil|Location1.Y=2575.084mil|Location2.Y=2586.334mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-15(15.05mm,13.8mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3834.926mil|Location2.X=3846.176mil|Location1.Y=2544.572mil|Location2.Y=2555.822mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3834.926mil|Location2.X=3846.176mil|Location1.Y=2544.572mil|Location2.Y=2555.822mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-16(15.55mm,13.8mm) on L1 (Signal) And Pad U2-17(16.05mm,13.8mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3825.084mil|Location2.X=3836.334mil|Location1.Y=2575.084mil|Location2.Y=2586.334mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3825.084mil|Location2.X=3836.334mil|Location1.Y=2575.084mil|Location2.Y=2586.334mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-16(15.55mm,13.8mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3854.611mil|Location2.X=3865.861mil|Location1.Y=2544.572mil|Location2.Y=2555.822mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3854.611mil|Location2.X=3865.861mil|Location1.Y=2544.572mil|Location2.Y=2555.822mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-17(16.05mm,13.8mm) on L1 (Signal) And Pad U2-18(16.55mm,13.8mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3844.769mil|Location2.X=3856.019mil|Location1.Y=2575.084mil|Location2.Y=2586.334mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3844.769mil|Location2.X=3856.019mil|Location1.Y=2575.084mil|Location2.Y=2586.334mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-17(16.05mm,13.8mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3874.296mil|Location2.X=3885.546mil|Location1.Y=2544.572mil|Location2.Y=2555.822mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3874.296mil|Location2.X=3885.546mil|Location1.Y=2544.572mil|Location2.Y=2555.822mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-18(16.55mm,13.8mm) on L1 (Signal) And Pad U2-19(17.05mm,13.8mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3864.454mil|Location2.X=3875.704mil|Location1.Y=2575.084mil|Location2.Y=2586.334mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3864.454mil|Location2.X=3875.704mil|Location1.Y=2575.084mil|Location2.Y=2586.334mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-18(16.55mm,13.8mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3893.981mil|Location2.X=3905.231mil|Location1.Y=2544.572mil|Location2.Y=2555.822mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3893.981mil|Location2.X=3905.231mil|Location1.Y=2544.572mil|Location2.Y=2555.822mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-19(17.05mm,13.8mm) on L1 (Signal) And Pad U2-20(17.55mm,13.8mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3884.139mil|Location2.X=3895.389mil|Location1.Y=2575.084mil|Location2.Y=2586.334mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3884.139mil|Location2.X=3895.389mil|Location1.Y=2575.084mil|Location2.Y=2586.334mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-19(17.05mm,13.8mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.265mil|Location2.X=3762.515mil|Location1.Y=2767.997mil|Location2.Y=2779.247mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.265mil|Location2.X=3762.515mil|Location1.Y=2767.997mil|Location2.Y=2779.247mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-2(13.4mm,19.45mm) on L1 (Signal) And Pad U2-3(13.4mm,18.95mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3760.123mil|Location2.X=3771.373mil|Location1.Y=2777.84mil|Location2.Y=2789.09mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3760.123mil|Location2.X=3771.373mil|Location1.Y=2777.84mil|Location2.Y=2789.09mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-2(13.4mm,19.45mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3913.666mil|Location2.X=3924.916mil|Location1.Y=2544.572mil|Location2.Y=2555.822mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3913.666mil|Location2.X=3924.916mil|Location1.Y=2544.572mil|Location2.Y=2555.822mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-20(17.55mm,13.8mm) on L1 (Signal) And Pad U2-21(18.05mm,13.8mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3903.824mil|Location2.X=3915.074mil|Location1.Y=2575.084mil|Location2.Y=2586.334mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3903.824mil|Location2.X=3915.074mil|Location1.Y=2575.084mil|Location2.Y=2586.334mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-20(17.55mm,13.8mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3933.351mil|Location2.X=3944.601mil|Location1.Y=2544.572mil|Location2.Y=2555.822mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3933.351mil|Location2.X=3944.601mil|Location1.Y=2544.572mil|Location2.Y=2555.822mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-21(18.05mm,13.8mm) on L1 (Signal) And Pad U2-22(18.55mm,13.8mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3923.509mil|Location2.X=3934.759mil|Location1.Y=2575.084mil|Location2.Y=2586.334mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3923.509mil|Location2.X=3934.759mil|Location1.Y=2575.084mil|Location2.Y=2586.334mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-21(18.05mm,13.8mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3953.036mil|Location2.X=3964.286mil|Location1.Y=2544.572mil|Location2.Y=2555.822mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3953.036mil|Location2.X=3964.286mil|Location1.Y=2544.572mil|Location2.Y=2555.822mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-22(18.55mm,13.8mm) on L1 (Signal) And Pad U2-23(19.05mm,13.8mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3943.194mil|Location2.X=3954.444mil|Location1.Y=2575.084mil|Location2.Y=2586.334mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3943.194mil|Location2.X=3954.444mil|Location1.Y=2575.084mil|Location2.Y=2586.334mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-22(18.55mm,13.8mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3972.721mil|Location2.X=3983.971mil|Location1.Y=2544.572mil|Location2.Y=2555.822mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3972.721mil|Location2.X=3983.971mil|Location1.Y=2544.572mil|Location2.Y=2555.822mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-23(19.05mm,13.8mm) on L1 (Signal) And Pad U2-24(19.55mm,13.8mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3962.879mil|Location2.X=3974.129mil|Location1.Y=2575.084mil|Location2.Y=2586.334mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3962.879mil|Location2.X=3974.129mil|Location1.Y=2575.084mil|Location2.Y=2586.334mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-23(19.05mm,13.8mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3982.564mil|Location2.X=3993.814mil|Location1.Y=2575.084mil|Location2.Y=2586.334mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3982.564mil|Location2.X=3993.814mil|Location1.Y=2575.084mil|Location2.Y=2586.334mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-24(19.55mm,13.8mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4018.981mil|Location2.X=4030.231mil|Location1.Y=2590.832mil|Location2.Y=2602.082mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4018.981mil|Location2.X=4030.231mil|Location1.Y=2590.832mil|Location2.Y=2602.082mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-25(20.2mm,14.45mm) on L1 (Signal) And Pad U2-26(20.2mm,14.95mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.469mil|Location2.X=3999.719mil|Location1.Y=2580.989mil|Location2.Y=2592.239mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.469mil|Location2.X=3999.719mil|Location1.Y=2580.989mil|Location2.Y=2592.239mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-25(20.2mm,14.45mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4018.981mil|Location2.X=4030.231mil|Location1.Y=2610.517mil|Location2.Y=2621.767mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4018.981mil|Location2.X=4030.231mil|Location1.Y=2610.517mil|Location2.Y=2621.767mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-26(20.2mm,14.95mm) on L1 (Signal) And Pad U2-27(20.2mm,15.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.469mil|Location2.X=3999.719mil|Location1.Y=2600.674mil|Location2.Y=2611.924mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.469mil|Location2.X=3999.719mil|Location1.Y=2600.674mil|Location2.Y=2611.924mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-26(20.2mm,14.95mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4018.981mil|Location2.X=4030.231mil|Location1.Y=2630.202mil|Location2.Y=2641.452mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4018.981mil|Location2.X=4030.231mil|Location1.Y=2630.202mil|Location2.Y=2641.452mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-27(20.2mm,15.45mm) on L1 (Signal) And Pad U2-28(20.2mm,15.95mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.469mil|Location2.X=3999.719mil|Location1.Y=2620.359mil|Location2.Y=2631.609mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.469mil|Location2.X=3999.719mil|Location1.Y=2620.359mil|Location2.Y=2631.609mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-27(20.2mm,15.45mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4018.981mil|Location2.X=4030.231mil|Location1.Y=2649.887mil|Location2.Y=2661.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4018.981mil|Location2.X=4030.231mil|Location1.Y=2649.887mil|Location2.Y=2661.137mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-28(20.2mm,15.95mm) on L1 (Signal) And Pad U2-29(20.2mm,16.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.469mil|Location2.X=3999.719mil|Location1.Y=2640.044mil|Location2.Y=2651.294mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.469mil|Location2.X=3999.719mil|Location1.Y=2640.044mil|Location2.Y=2651.294mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-28(20.2mm,15.95mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4018.981mil|Location2.X=4030.231mil|Location1.Y=2669.572mil|Location2.Y=2680.822mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4018.981mil|Location2.X=4030.231mil|Location1.Y=2669.572mil|Location2.Y=2680.822mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-29(20.2mm,16.45mm) on L1 (Signal) And Pad U2-30(20.2mm,16.95mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.469mil|Location2.X=3999.719mil|Location1.Y=2659.729mil|Location2.Y=2670.979mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.469mil|Location2.X=3999.719mil|Location1.Y=2659.729mil|Location2.Y=2670.979mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-29(20.2mm,16.45mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.265mil|Location2.X=3762.515mil|Location1.Y=2748.312mil|Location2.Y=2759.562mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.265mil|Location2.X=3762.515mil|Location1.Y=2748.312mil|Location2.Y=2759.562mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-3(13.4mm,18.95mm) on L1 (Signal) And Pad U2-4(13.4mm,18.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3760.123mil|Location2.X=3771.373mil|Location1.Y=2758.155mil|Location2.Y=2769.405mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3760.123mil|Location2.X=3771.373mil|Location1.Y=2758.155mil|Location2.Y=2769.405mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-3(13.4mm,18.95mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4018.981mil|Location2.X=4030.231mil|Location1.Y=2689.257mil|Location2.Y=2700.507mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4018.981mil|Location2.X=4030.231mil|Location1.Y=2689.257mil|Location2.Y=2700.507mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-30(20.2mm,16.95mm) on L1 (Signal) And Pad U2-31(20.2mm,17.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.469mil|Location2.X=3999.719mil|Location1.Y=2679.414mil|Location2.Y=2690.664mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.469mil|Location2.X=3999.719mil|Location1.Y=2679.414mil|Location2.Y=2690.664mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-30(20.2mm,16.95mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4018.981mil|Location2.X=4030.231mil|Location1.Y=2708.942mil|Location2.Y=2720.192mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4018.981mil|Location2.X=4030.231mil|Location1.Y=2708.942mil|Location2.Y=2720.192mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-31(20.2mm,17.45mm) on L1 (Signal) And Pad U2-32(20.2mm,17.95mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.469mil|Location2.X=3999.719mil|Location1.Y=2699.099mil|Location2.Y=2710.349mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.469mil|Location2.X=3999.719mil|Location1.Y=2699.099mil|Location2.Y=2710.349mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-31(20.2mm,17.45mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4018.981mil|Location2.X=4030.231mil|Location1.Y=2728.627mil|Location2.Y=2739.877mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4018.981mil|Location2.X=4030.231mil|Location1.Y=2728.627mil|Location2.Y=2739.877mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-32(20.2mm,17.95mm) on L1 (Signal) And Pad U2-33(20.2mm,18.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.469mil|Location2.X=3999.719mil|Location1.Y=2718.785mil|Location2.Y=2730.035mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.469mil|Location2.X=3999.719mil|Location1.Y=2718.785mil|Location2.Y=2730.035mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-32(20.2mm,17.95mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4018.981mil|Location2.X=4030.231mil|Location1.Y=2748.312mil|Location2.Y=2759.562mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4018.981mil|Location2.X=4030.231mil|Location1.Y=2748.312mil|Location2.Y=2759.562mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-33(20.2mm,18.45mm) on L1 (Signal) And Pad U2-34(20.2mm,18.95mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.469mil|Location2.X=3999.719mil|Location1.Y=2738.47mil|Location2.Y=2749.72mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.469mil|Location2.X=3999.719mil|Location1.Y=2738.47mil|Location2.Y=2749.72mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-33(20.2mm,18.45mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4018.981mil|Location2.X=4030.231mil|Location1.Y=2767.997mil|Location2.Y=2779.247mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4018.981mil|Location2.X=4030.231mil|Location1.Y=2767.997mil|Location2.Y=2779.247mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-34(20.2mm,18.95mm) on L1 (Signal) And Pad U2-35(20.2mm,19.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.469mil|Location2.X=3999.719mil|Location1.Y=2758.155mil|Location2.Y=2769.405mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.469mil|Location2.X=3999.719mil|Location1.Y=2758.155mil|Location2.Y=2769.405mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-34(20.2mm,18.95mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4018.981mil|Location2.X=4030.231mil|Location1.Y=2787.682mil|Location2.Y=2798.932mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4018.981mil|Location2.X=4030.231mil|Location1.Y=2787.682mil|Location2.Y=2798.932mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-35(20.2mm,19.45mm) on L1 (Signal) And Pad U2-36(20.2mm,19.95mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.469mil|Location2.X=3999.719mil|Location1.Y=2777.84mil|Location2.Y=2789.09mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.469mil|Location2.X=3999.719mil|Location1.Y=2777.84mil|Location2.Y=2789.09mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-35(20.2mm,19.45mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.469mil|Location2.X=3999.719mil|Location1.Y=2797.525mil|Location2.Y=2808.775mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.469mil|Location2.X=3999.719mil|Location1.Y=2797.525mil|Location2.Y=2808.775mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-36(20.2mm,19.95mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3972.721mil|Location2.X=3983.971mil|Location1.Y=2812.288mil|Location2.Y=2823.538mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3972.721mil|Location2.X=3983.971mil|Location1.Y=2812.288mil|Location2.Y=2823.538mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-37(19.55mm,20.6mm) on L1 (Signal) And Pad U2-38(19.05mm,20.6mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3982.564mil|Location2.X=3993.814mil|Location1.Y=2803.43mil|Location2.Y=2814.68mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3982.564mil|Location2.X=3993.814mil|Location1.Y=2803.43mil|Location2.Y=2814.68mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-37(19.55mm,20.6mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3953.036mil|Location2.X=3964.286mil|Location1.Y=2812.288mil|Location2.Y=2823.538mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3953.036mil|Location2.X=3964.286mil|Location1.Y=2812.288mil|Location2.Y=2823.538mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-38(19.05mm,20.6mm) on L1 (Signal) And Pad U2-39(18.55mm,20.6mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3962.879mil|Location2.X=3974.129mil|Location1.Y=2803.43mil|Location2.Y=2814.68mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3962.879mil|Location2.X=3974.129mil|Location1.Y=2803.43mil|Location2.Y=2814.68mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-38(19.05mm,20.6mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3933.351mil|Location2.X=3944.601mil|Location1.Y=2812.288mil|Location2.Y=2823.538mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3933.351mil|Location2.X=3944.601mil|Location1.Y=2812.288mil|Location2.Y=2823.538mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-39(18.55mm,20.6mm) on L1 (Signal) And Pad U2-40(18.05mm,20.6mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3943.194mil|Location2.X=3954.444mil|Location1.Y=2803.43mil|Location2.Y=2814.68mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3943.194mil|Location2.X=3954.444mil|Location1.Y=2803.43mil|Location2.Y=2814.68mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-39(18.55mm,20.6mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3760.123mil|Location2.X=3771.373mil|Location1.Y=2738.47mil|Location2.Y=2749.72mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3760.123mil|Location2.X=3771.373mil|Location1.Y=2738.47mil|Location2.Y=2749.72mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-4(13.4mm,18.45mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.265mil|Location2.X=3762.515mil|Location1.Y=2728.627mil|Location2.Y=2739.877mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.265mil|Location2.X=3762.515mil|Location1.Y=2728.627mil|Location2.Y=2739.877mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-4(13.4mm,18.45mm) on L1 (Signal) And Pad U2-5(13.4mm,17.95mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3913.666mil|Location2.X=3924.916mil|Location1.Y=2812.288mil|Location2.Y=2823.538mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3913.666mil|Location2.X=3924.916mil|Location1.Y=2812.288mil|Location2.Y=2823.538mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-40(18.05mm,20.6mm) on L1 (Signal) And Pad U2-41(17.55mm,20.6mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3923.509mil|Location2.X=3934.759mil|Location1.Y=2803.43mil|Location2.Y=2814.68mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3923.509mil|Location2.X=3934.759mil|Location1.Y=2803.43mil|Location2.Y=2814.68mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-40(18.05mm,20.6mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3893.981mil|Location2.X=3905.231mil|Location1.Y=2812.288mil|Location2.Y=2823.538mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3893.981mil|Location2.X=3905.231mil|Location1.Y=2812.288mil|Location2.Y=2823.538mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-41(17.55mm,20.6mm) on L1 (Signal) And Pad U2-42(17.05mm,20.6mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3903.824mil|Location2.X=3915.074mil|Location1.Y=2803.43mil|Location2.Y=2814.68mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3903.824mil|Location2.X=3915.074mil|Location1.Y=2803.43mil|Location2.Y=2814.68mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-41(17.55mm,20.6mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3874.296mil|Location2.X=3885.546mil|Location1.Y=2812.288mil|Location2.Y=2823.538mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3874.296mil|Location2.X=3885.546mil|Location1.Y=2812.288mil|Location2.Y=2823.538mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-42(17.05mm,20.6mm) on L1 (Signal) And Pad U2-43(16.55mm,20.6mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3884.139mil|Location2.X=3895.389mil|Location1.Y=2803.43mil|Location2.Y=2814.68mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3884.139mil|Location2.X=3895.389mil|Location1.Y=2803.43mil|Location2.Y=2814.68mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-42(17.05mm,20.6mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3854.611mil|Location2.X=3865.861mil|Location1.Y=2812.288mil|Location2.Y=2823.538mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3854.611mil|Location2.X=3865.861mil|Location1.Y=2812.288mil|Location2.Y=2823.538mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-43(16.55mm,20.6mm) on L1 (Signal) And Pad U2-44(16.05mm,20.6mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3864.454mil|Location2.X=3875.704mil|Location1.Y=2803.43mil|Location2.Y=2814.68mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3864.454mil|Location2.X=3875.704mil|Location1.Y=2803.43mil|Location2.Y=2814.68mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-43(16.55mm,20.6mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3834.926mil|Location2.X=3846.176mil|Location1.Y=2812.288mil|Location2.Y=2823.538mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3834.926mil|Location2.X=3846.176mil|Location1.Y=2812.288mil|Location2.Y=2823.538mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-44(16.05mm,20.6mm) on L1 (Signal) And Pad U2-45(15.55mm,20.6mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3844.769mil|Location2.X=3856.019mil|Location1.Y=2803.43mil|Location2.Y=2814.68mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3844.769mil|Location2.X=3856.019mil|Location1.Y=2803.43mil|Location2.Y=2814.68mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-44(16.05mm,20.6mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3815.241mil|Location2.X=3826.491mil|Location1.Y=2812.288mil|Location2.Y=2823.538mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3815.241mil|Location2.X=3826.491mil|Location1.Y=2812.288mil|Location2.Y=2823.538mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-45(15.55mm,20.6mm) on L1 (Signal) And Pad U2-46(15.05mm,20.6mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3825.084mil|Location2.X=3836.334mil|Location1.Y=2803.43mil|Location2.Y=2814.68mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3825.084mil|Location2.X=3836.334mil|Location1.Y=2803.43mil|Location2.Y=2814.68mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-45(15.55mm,20.6mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3795.556mil|Location2.X=3806.806mil|Location1.Y=2812.288mil|Location2.Y=2823.538mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3795.556mil|Location2.X=3806.806mil|Location1.Y=2812.288mil|Location2.Y=2823.538mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-46(15.05mm,20.6mm) on L1 (Signal) And Pad U2-47(14.55mm,20.6mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3805.399mil|Location2.X=3816.649mil|Location1.Y=2803.43mil|Location2.Y=2814.68mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3805.399mil|Location2.X=3816.649mil|Location1.Y=2803.43mil|Location2.Y=2814.68mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-46(15.05mm,20.6mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3775.871mil|Location2.X=3787.121mil|Location1.Y=2812.288mil|Location2.Y=2823.538mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3775.871mil|Location2.X=3787.121mil|Location1.Y=2812.288mil|Location2.Y=2823.538mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-47(14.55mm,20.6mm) on L1 (Signal) And Pad U2-48(14.05mm,20.6mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3785.714mil|Location2.X=3796.964mil|Location1.Y=2803.43mil|Location2.Y=2814.68mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3785.714mil|Location2.X=3796.964mil|Location1.Y=2803.43mil|Location2.Y=2814.68mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-47(14.55mm,20.6mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3766.029mil|Location2.X=3777.279mil|Location1.Y=2803.43mil|Location2.Y=2814.68mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3766.029mil|Location2.X=3777.279mil|Location1.Y=2803.43mil|Location2.Y=2814.68mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-48(14.05mm,20.6mm) on L1 (Signal) And Pad U2-49(16.8mm,17.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3760.123mil|Location2.X=3771.373mil|Location1.Y=2718.785mil|Location2.Y=2730.035mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3760.123mil|Location2.X=3771.373mil|Location1.Y=2718.785mil|Location2.Y=2730.035mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-49(16.8mm,17.2mm) on L1 (Signal) And Pad U2-5(13.4mm,17.95mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3760.123mil|Location2.X=3771.373mil|Location1.Y=2699.099mil|Location2.Y=2710.349mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3760.123mil|Location2.X=3771.373mil|Location1.Y=2699.099mil|Location2.Y=2710.349mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-49(16.8mm,17.2mm) on L1 (Signal) And Pad U2-6(13.4mm,17.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3760.123mil|Location2.X=3771.373mil|Location1.Y=2679.414mil|Location2.Y=2690.664mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3760.123mil|Location2.X=3771.373mil|Location1.Y=2679.414mil|Location2.Y=2690.664mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-49(16.8mm,17.2mm) on L1 (Signal) And Pad U2-7(13.4mm,16.95mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3760.123mil|Location2.X=3771.373mil|Location1.Y=2659.729mil|Location2.Y=2670.979mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3760.123mil|Location2.X=3771.373mil|Location1.Y=2659.729mil|Location2.Y=2670.979mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-49(16.8mm,17.2mm) on L1 (Signal) And Pad U2-8(13.4mm,16.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3760.123mil|Location2.X=3771.373mil|Location1.Y=2640.044mil|Location2.Y=2651.294mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3760.123mil|Location2.X=3771.373mil|Location1.Y=2640.044mil|Location2.Y=2651.294mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-49(16.8mm,17.2mm) on L1 (Signal) And Pad U2-9(13.4mm,15.95mm) on L1 (Signal) [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.265mil|Location2.X=3762.515mil|Location1.Y=2708.942mil|Location2.Y=2720.192mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.265mil|Location2.X=3762.515mil|Location1.Y=2708.942mil|Location2.Y=2720.192mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-5(13.4mm,17.95mm) on L1 (Signal) And Pad U2-6(13.4mm,17.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.265mil|Location2.X=3762.515mil|Location1.Y=2689.257mil|Location2.Y=2700.507mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.265mil|Location2.X=3762.515mil|Location1.Y=2689.257mil|Location2.Y=2700.507mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-6(13.4mm,17.45mm) on L1 (Signal) And Pad U2-7(13.4mm,16.95mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.265mil|Location2.X=3762.515mil|Location1.Y=2669.572mil|Location2.Y=2680.822mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.265mil|Location2.X=3762.515mil|Location1.Y=2669.572mil|Location2.Y=2680.822mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-7(13.4mm,16.95mm) on L1 (Signal) And Pad U2-8(13.4mm,16.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.265mil|Location2.X=3762.515mil|Location1.Y=2649.887mil|Location2.Y=2661.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3751.265mil|Location2.X=3762.515mil|Location1.Y=2649.887mil|Location2.Y=2661.137mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U2-8(13.4mm,16.45mm) on L1 (Signal) And Pad U2-9(13.4mm,15.95mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3519.966mil|Location2.X=3531.216mil|Location1.Y=3108.548mil|Location2.Y=3119.798mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3519.966mil|Location2.X=3531.216mil|Location1.Y=3108.548mil|Location2.Y=3119.798mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.15mm &lt; 0.254mm) Between Pad U3-1(8.05mm,27.45mm) on L1 (Signal) And Pad U3-2(7.55mm,27.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3537.158mil|Location2.X=3550.723mil|Location1.Y=3075.607mil|Location2.Y=3086.857mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3537.158mil|Location2.X=3550.723mil|Location1.Y=3075.607mil|Location2.Y=3086.857mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.077mm &lt; 0.254mm) Between Pad U3-1(8.05mm,27.45mm) on L1 (Signal) And Pad U3-24(8.775mm,26.7mm) on L1 (Signal) [Top Solder] Mask Sliver [0.077mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3531.777mil|Location2.X=3543.027mil|Location1.Y=3072.131mil|Location2.Y=3083.381mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3531.777mil|Location2.X=3543.027mil|Location1.Y=3072.131mil|Location2.Y=3083.381mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U3-1(8.05mm,27.45mm) on L1 (Signal) And Pad U3-25(6.8mm,25.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3426.493mil|Location2.X=3437.743mil|Location1.Y=3015.107mil|Location2.Y=3026.357mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3426.493mil|Location2.X=3437.743mil|Location1.Y=3015.107mil|Location2.Y=3026.357mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.254mm) Between Pad U3-10(4.825mm,25.2mm) on L1 (Signal) And Pad U3-25(6.8mm,25.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3426.493mil|Location2.X=3437.743mil|Location1.Y=2995.422mil|Location2.Y=3006.672mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3426.493mil|Location2.X=3437.743mil|Location1.Y=2995.422mil|Location2.Y=3006.672mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.254mm) Between Pad U3-11(4.825mm,24.7mm) on L1 (Signal) And Pad U3-25(6.8mm,25.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3424.032mil|Location2.X=3437.597mil|Location1.Y=2952.513mil|Location2.Y=2963.763mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3424.032mil|Location2.X=3437.597mil|Location1.Y=2952.513mil|Location2.Y=2963.763mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.077mm &lt; 0.254mm) Between Pad U3-12(4.825mm,24.2mm) on L1 (Signal) And Pad U3-13(5.55mm,23.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.077mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3426.493mil|Location2.X=3437.743mil|Location1.Y=2975.737mil|Location2.Y=2986.987mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3426.493mil|Location2.X=3437.743mil|Location1.Y=2975.737mil|Location2.Y=2986.987mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.254mm) Between Pad U3-12(4.825mm,24.2mm) on L1 (Signal) And Pad U3-25(6.8mm,25.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3441.225mil|Location2.X=3452.475mil|Location1.Y=2919.572mil|Location2.Y=2930.822mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3441.225mil|Location2.X=3452.475mil|Location1.Y=2919.572mil|Location2.Y=2930.822mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.15mm &lt; 0.254mm) Between Pad U3-13(5.55mm,23.45mm) on L1 (Signal) And Pad U3-14(6.05mm,23.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3429.414mil|Location2.X=3440.664mil|Location1.Y=2955.989mil|Location2.Y=2967.239mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3429.414mil|Location2.X=3440.664mil|Location1.Y=2955.989mil|Location2.Y=2967.239mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U3-13(5.55mm,23.45mm) on L1 (Signal) And Pad U3-25(6.8mm,25.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3460.91mil|Location2.X=3472.16mil|Location1.Y=2919.572mil|Location2.Y=2930.822mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3460.91mil|Location2.X=3472.16mil|Location1.Y=2919.572mil|Location2.Y=2930.822mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.15mm &lt; 0.254mm) Between Pad U3-14(6.05mm,23.45mm) on L1 (Signal) And Pad U3-15(6.55mm,23.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3444.178mil|Location2.X=3455.428mil|Location1.Y=2955.989mil|Location2.Y=2967.239mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3444.178mil|Location2.X=3455.428mil|Location1.Y=2955.989mil|Location2.Y=2967.239mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U3-14(6.05mm,23.45mm) on L1 (Signal) And Pad U3-25(6.8mm,25.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3480.595mil|Location2.X=3491.845mil|Location1.Y=2919.572mil|Location2.Y=2930.822mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3480.595mil|Location2.X=3491.845mil|Location1.Y=2919.572mil|Location2.Y=2930.822mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.15mm &lt; 0.254mm) Between Pad U3-15(6.55mm,23.45mm) on L1 (Signal) And Pad U3-16(7.05mm,23.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3463.863mil|Location2.X=3475.113mil|Location1.Y=2955.989mil|Location2.Y=2967.239mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3463.863mil|Location2.X=3475.113mil|Location1.Y=2955.989mil|Location2.Y=2967.239mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U3-15(6.55mm,23.45mm) on L1 (Signal) And Pad U3-25(6.8mm,25.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3500.28mil|Location2.X=3511.53mil|Location1.Y=2919.572mil|Location2.Y=2930.822mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3500.28mil|Location2.X=3511.53mil|Location1.Y=2919.572mil|Location2.Y=2930.822mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.15mm &lt; 0.254mm) Between Pad U3-16(7.05mm,23.45mm) on L1 (Signal) And Pad U3-17(7.55mm,23.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3483.548mil|Location2.X=3494.798mil|Location1.Y=2955.989mil|Location2.Y=2967.239mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3483.548mil|Location2.X=3494.798mil|Location1.Y=2955.989mil|Location2.Y=2967.239mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U3-16(7.05mm,23.45mm) on L1 (Signal) And Pad U3-25(6.8mm,25.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3519.966mil|Location2.X=3531.216mil|Location1.Y=2919.572mil|Location2.Y=2930.822mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3519.966mil|Location2.X=3531.216mil|Location1.Y=2919.572mil|Location2.Y=2930.822mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.15mm &lt; 0.254mm) Between Pad U3-17(7.55mm,23.45mm) on L1 (Signal) And Pad U3-18(8.05mm,23.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3503.233mil|Location2.X=3514.483mil|Location1.Y=2955.989mil|Location2.Y=2967.239mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3503.233mil|Location2.X=3514.483mil|Location1.Y=2955.989mil|Location2.Y=2967.239mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U3-17(7.55mm,23.45mm) on L1 (Signal) And Pad U3-25(6.8mm,25.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3537.158mil|Location2.X=3550.754mil|Location1.Y=2952.513mil|Location2.Y=2963.763mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3537.158mil|Location2.X=3550.754mil|Location1.Y=2952.513mil|Location2.Y=2963.763mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.077mm &lt; 0.254mm) Between Pad U3-18(8.05mm,23.45mm) on L1 (Signal) And Pad U3-19(8.775mm,24.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.077mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3522.918mil|Location2.X=3534.168mil|Location1.Y=2955.989mil|Location2.Y=2967.239mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3522.918mil|Location2.X=3534.168mil|Location1.Y=2955.989mil|Location2.Y=2967.239mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U3-18(8.05mm,23.45mm) on L1 (Signal) And Pad U3-25(6.8mm,25.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3534.698mil|Location2.X=3545.948mil|Location1.Y=2960.91mil|Location2.Y=2972.16mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3534.698mil|Location2.X=3545.948mil|Location1.Y=2960.91mil|Location2.Y=2972.16mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.254mm) Between Pad U3-19(8.775mm,24.2mm) on L1 (Signal) And Pad U3-25(6.8mm,25.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3517.013mil|Location2.X=3528.263mil|Location1.Y=3072.131mil|Location2.Y=3083.381mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3517.013mil|Location2.X=3528.263mil|Location1.Y=3072.131mil|Location2.Y=3083.381mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U3-2(7.55mm,27.45mm) on L1 (Signal) And Pad U3-25(6.8mm,25.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3500.28mil|Location2.X=3511.53mil|Location1.Y=3108.548mil|Location2.Y=3119.798mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3500.28mil|Location2.X=3511.53mil|Location1.Y=3108.548mil|Location2.Y=3119.798mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.15mm &lt; 0.254mm) Between Pad U3-2(7.55mm,27.45mm) on L1 (Signal) And Pad U3-3(7.05mm,27.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3534.698mil|Location2.X=3545.948mil|Location1.Y=2973.643mil|Location2.Y=2984.893mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3534.698mil|Location2.X=3545.948mil|Location1.Y=2973.643mil|Location2.Y=2984.893mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.254mm) Between Pad U3-20(8.775mm,24.7mm) on L1 (Signal) And Pad U3-25(6.8mm,25.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3534.698mil|Location2.X=3545.948mil|Location1.Y=2993.328mil|Location2.Y=3004.578mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3534.698mil|Location2.X=3545.948mil|Location1.Y=2993.328mil|Location2.Y=3004.578mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.254mm) Between Pad U3-21(8.775mm,25.2mm) on L1 (Signal) And Pad U3-25(6.8mm,25.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3534.698mil|Location2.X=3545.948mil|Location1.Y=3013.013mil|Location2.Y=3024.263mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3534.698mil|Location2.X=3545.948mil|Location1.Y=3013.013mil|Location2.Y=3024.263mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.254mm) Between Pad U3-22(8.775mm,25.7mm) on L1 (Signal) And Pad U3-25(6.8mm,25.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3534.698mil|Location2.X=3545.948mil|Location1.Y=3032.698mil|Location2.Y=3043.948mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3534.698mil|Location2.X=3545.948mil|Location1.Y=3032.698mil|Location2.Y=3043.948mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.254mm) Between Pad U3-23(8.775mm,26.2mm) on L1 (Signal) And Pad U3-25(6.8mm,25.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3534.698mil|Location2.X=3545.948mil|Location1.Y=3052.383mil|Location2.Y=3063.633mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3534.698mil|Location2.X=3545.948mil|Location1.Y=3052.383mil|Location2.Y=3063.633mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.254mm) Between Pad U3-24(8.775mm,26.7mm) on L1 (Signal) And Pad U3-25(6.8mm,25.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3497.328mil|Location2.X=3508.578mil|Location1.Y=3072.131mil|Location2.Y=3083.381mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3497.328mil|Location2.X=3508.578mil|Location1.Y=3072.131mil|Location2.Y=3083.381mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U3-25(6.8mm,25.45mm) on L1 (Signal) And Pad U3-3(7.05mm,27.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3477.643mil|Location2.X=3488.893mil|Location1.Y=3072.131mil|Location2.Y=3083.381mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3477.643mil|Location2.X=3488.893mil|Location1.Y=3072.131mil|Location2.Y=3083.381mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U3-25(6.8mm,25.45mm) on L1 (Signal) And Pad U3-4(6.55mm,27.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3457.958mil|Location2.X=3469.208mil|Location1.Y=3072.131mil|Location2.Y=3083.381mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3457.958mil|Location2.X=3469.208mil|Location1.Y=3072.131mil|Location2.Y=3083.381mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U3-25(6.8mm,25.45mm) on L1 (Signal) And Pad U3-5(6.05mm,27.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3438.273mil|Location2.X=3449.523mil|Location1.Y=3072.131mil|Location2.Y=3083.381mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3438.273mil|Location2.X=3449.523mil|Location1.Y=3072.131mil|Location2.Y=3083.381mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U3-25(6.8mm,25.45mm) on L1 (Signal) And Pad U3-6(5.55mm,27.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3426.493mil|Location2.X=3437.743mil|Location1.Y=3067.21mil|Location2.Y=3078.46mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3426.493mil|Location2.X=3437.743mil|Location1.Y=3067.21mil|Location2.Y=3078.46mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.254mm) Between Pad U3-25(6.8mm,25.45mm) on L1 (Signal) And Pad U3-7(4.825mm,26.7mm) on L1 (Signal) [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3426.493mil|Location2.X=3437.743mil|Location1.Y=3054.477mil|Location2.Y=3065.727mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3426.493mil|Location2.X=3437.743mil|Location1.Y=3054.477mil|Location2.Y=3065.727mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.254mm) Between Pad U3-25(6.8mm,25.45mm) on L1 (Signal) And Pad U3-8(4.825mm,26.2mm) on L1 (Signal) [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3426.493mil|Location2.X=3437.743mil|Location1.Y=3034.792mil|Location2.Y=3046.042mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3426.493mil|Location2.X=3437.743mil|Location1.Y=3034.792mil|Location2.Y=3046.042mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.148mm &lt; 0.254mm) Between Pad U3-25(6.8mm,25.45mm) on L1 (Signal) And Pad U3-9(4.825mm,25.7mm) on L1 (Signal) [Top Solder] Mask Sliver [0.148mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3480.595mil|Location2.X=3491.845mil|Location1.Y=3108.548mil|Location2.Y=3119.798mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3480.595mil|Location2.X=3491.845mil|Location1.Y=3108.548mil|Location2.Y=3119.798mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.15mm &lt; 0.254mm) Between Pad U3-3(7.05mm,27.45mm) on L1 (Signal) And Pad U3-4(6.55mm,27.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3460.91mil|Location2.X=3472.16mil|Location1.Y=3108.548mil|Location2.Y=3119.798mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3460.91mil|Location2.X=3472.16mil|Location1.Y=3108.548mil|Location2.Y=3119.798mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.15mm &lt; 0.254mm) Between Pad U3-4(6.55mm,27.45mm) on L1 (Signal) And Pad U3-5(6.05mm,27.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3441.225mil|Location2.X=3452.475mil|Location1.Y=3108.548mil|Location2.Y=3119.798mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3441.225mil|Location2.X=3452.475mil|Location1.Y=3108.548mil|Location2.Y=3119.798mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.15mm &lt; 0.254mm) Between Pad U3-5(6.05mm,27.45mm) on L1 (Signal) And Pad U3-6(5.55mm,27.45mm) on L1 (Signal) [Top Solder] Mask Sliver [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3424.032mil|Location2.X=3437.628mil|Location1.Y=3075.607mil|Location2.Y=3086.857mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3424.032mil|Location2.X=3437.628mil|Location1.Y=3075.607mil|Location2.Y=3086.857mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.077mm &lt; 0.254mm) Between Pad U3-6(5.55mm,27.45mm) on L1 (Signal) And Pad U3-7(4.825mm,26.7mm) on L1 (Signal) [Top Solder] Mask Sliver [0.077mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4228.627mil|Location2.X=4239.877mil|Location1.Y=2453.036mil|Location2.Y=2464.286mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4228.627mil|Location2.X=4239.877mil|Location1.Y=2453.036mil|Location2.Y=2464.286mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Via (25.8mm,10.8mm) from L1 (Signal) to L4 (Signal) And Via (25.8mm,11.6mm) from L1 (Signal) to L4 (Signal) [Bottom Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4244.375mil|Location2.X=4255.625mil|Location1.Y=2470.233mil|Location2.Y=2483.971mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4244.375mil|Location2.X=4255.625mil|Location1.Y=2470.233mil|Location2.Y=2483.971mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.225mm &lt; 0.254mm) Between Via (25.8mm,11.6mm) from L1 (Signal) to L4 (Signal) And Via (26.6mm,11.8mm) from L1 (Signal) to L4 (Signal) [Bottom Solder] Mask Sliver [0.225mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4346.737mil|Location2.X=4357.987mil|Location1.Y=2317.21mil|Location2.Y=2328.46mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4346.737mil|Location2.X=4357.987mil|Location1.Y=2317.21mil|Location2.Y=2328.46mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1mm &lt; 0.254mm) Between Via (28.45mm,7.75mm) from L1 (Signal) to L4 (Signal) And Via (29.15mm,7.75mm) from L1 (Signal) to L4 (Signal) [Bottom Solder] Mask Sliver [0.1mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDTZP04LNXBNEHLVKDO1Y33RNV2D2DAJUCYAE5LXKOORZKCKZHNOCM"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4303.099mil|Location2.X=4314.349mil|Location1.Y=2629.651mil|Location2.Y=2642.429mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4303.099mil|Location2.X=4314.349mil|Location1.Y=2629.651mil|Location2.Y=2642.429mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.247mm &lt; 0.254mm) Between Pad FB1-1(28.155mm,16.175mm) on L1 (Signal) And Track (27.434mm,15.637mm)(27.527mm,15.637mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.247mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4303.099mil|Location2.X=4314.349mil|Location1.Y=2666.626mil|Location2.Y=2679.451mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4303.099mil|Location2.X=4314.349mil|Location1.Y=2666.626mil|Location2.Y=2679.451mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.247mm &lt; 0.254mm) Between Pad FB1-1(28.155mm,16.175mm) on L1 (Signal) And Track (27.434mm,16.714mm)(27.527mm,16.714mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.247mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4286.439mil|Location2.X=4297.689mil|Location1.Y=2631.179mil|Location2.Y=2644.004mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4286.439mil|Location2.X=4297.689mil|Location1.Y=2631.179mil|Location2.Y=2644.004mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.247mm &lt; 0.254mm) Between Pad FB1-2(26.805mm,16.175mm) on L1 (Signal) And Track (27.434mm,15.637mm)(27.527mm,15.637mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.247mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4286.439mil|Location2.X=4297.689mil|Location1.Y=2665.099mil|Location2.Y=2677.876mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Asus\Documents\Proyectos Personales\pcb-designs\STM32_F4_w_MPU6050\Board_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4286.439mil|Location2.X=4297.689mil|Location1.Y=2665.099mil|Location2.Y=2677.876mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.247mm &lt; 0.254mm) Between Pad FB1-2(26.805mm,16.175mm) on L1 (Signal) And Track (27.434mm,16.714mm)(27.527mm,16.714mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.247mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
