@@ -16,10 +16,6 @@ __Previews/
 Templates/
 */Templates/
 
-*.PcbLib
-*.LibPkg
-*.SchLib
-
 *.Lnk
 *.Lock
 *.~*
