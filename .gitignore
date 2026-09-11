@@ -1,0 +1,19 @@
+*.PrjPcbStructure
+
+History/
+*/History/
+
+Project Logs*/
+*/Project Logs*/
+
+__Previews/
+*/__Previews/
+*.OutJob.tlh
+
+*.Lnk
+*.Lock
+*.~*
+
+*.PcbDoc.htm
+*.SchDoc.htm
+*.Annotation
