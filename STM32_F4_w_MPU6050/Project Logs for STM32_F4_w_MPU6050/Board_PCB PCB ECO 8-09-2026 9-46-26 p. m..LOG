@@ -1,8 +1,0 @@
-Removed Pin From Net: NetName=MCU_PA4 Pin=U2-15
-Removed Pin From Net: NetName=MCU_PA5 Pin=U2-16
-Removed Pin From Net: NetName=MCU_PA6 Pin=U2-17
-Removed Pin From Net: NetName=MCU_PA7 Pin=U2-29
-Added Pin To Net: NetName=MCU_PA4 Pin=U2-14
-Added Pin To Net: NetName=MCU_PA5 Pin=U2-15
-Added Pin To Net: NetName=MCU_PA6 Pin=U2-16
-Added Pin To Net: NetName=MCU_PA7 Pin=U2-17
