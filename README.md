@@ -35,6 +35,19 @@ These projects would not be possible without the help of
 * JLCPCB for the **design rules** and **manufacturing process**
 * **Git** for the merging conflicts and  **GitHub** for sharing those with you
 
+---
+
+## You might also be interested on this 👨‍💻
+
+Here are some other of my projects related to this repository:
+
+| Project | Description |
+| ------- | ----------- |
+| [STM32 Firmware libraries](https://github.com/jvillodres/stm32-peripheral-drivers) | Drivers based on STM32 microcontrollers for several external peripherals. |
+| [Firmware projects](#you-might-also-be-interested-on-this-) | Firmware for all the design projects shown in this repository (Not started yet). |
+
+---
+
 ## It wouldn't be complete if we left without a dad joke 🤓
 
 ![Jokes Card](https://readme-jokes.vercel.app/api?hideBorder)
