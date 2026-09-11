@@ -12,8 +12,8 @@ Here is a list with all the available projects on this repository. Feel free to 
 
 | Project | Description | Status | Version |
 | :--- | :--- | :--- | :---|
-| [**STM32 with IMU**](./STM32F4\_w\_MPU6050/) | Development board with IMU for movement processing. | Finished 🟢 | v1.0.0 |
-| [**ESP32 + PCB Antenna with No package**](./ESP32-Antenna-NoPackage/) | Compact IoT module optimized for RF with no standart package. | In progress 🟡 | v0.0.0 |
+| [**STM32 with IMU**](./STM32_F4\_w\_MPU6050/) | Development board with IMU for movement processing. | Finished 🟢 | v1.0.0 |
+| [**ESP32 + PCB Antenna (No package)**](./ESP32-Antenna-NoPackage/) | Compact IoT module optimized for RF with no standart package. | In progress 🟡 | v0.0.0 |
 
 
 ---
