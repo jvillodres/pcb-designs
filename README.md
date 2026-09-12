@@ -1,4 +1,4 @@
-# Electronic design projects ⚡
+<h1 align="center">Electronic design projects ⚡</h1>
 
 👋 Welcome to my electronics design portfolio! This repository centralizes all my hardware, printed circuit boards (PCB), and embedded systems design projects developed in **Altium Designer**.
 
