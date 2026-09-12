@@ -34,7 +34,7 @@ FSMEncodingStyle=eFMSDropDownList_OneHot
 IsProjectConflictPreventionWarningsEnabled=0
 ConstraintManagerFlow=0
 IsVirtualBomDocumentRemoved=1
-OutputPath=
+OutputPath=Outputs\Manufacturing
 LogFolderPath=
 ManagedProjectGUID=
 IncludeDesignInRelease=0
@@ -241,6 +241,9 @@ SCH_ExpandSheetNumber=0
 SCH_ExpandDocumentNumber=0
 SCH_HasExpandLogicalToPhysicalSheets=-1
 SaveSettingsToOutJob=0
+
+[Generic_EDE]
+OutputDir=Outputs\Manufacturing
 
 [OutputGroup1]
 Name=Netlist Outputs
