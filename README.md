@@ -14,6 +14,7 @@ Here is a list of all the projects available in this repository. Feel free to ta
 | :--- | :--- | :--- | :---|
 | [**STM32 with IMU**](./STM32_F4\_w\_MPU6050/) | Development board with IMU for motion processing. | Finished 🟢 | v1.0.0 |
 | [**ESP32 + PCB Antenna (No package)**](./ESP32-Antenna-NoPackage/) | Compact, RF-optimized IoT module without standard packaging. | In progress 🟡 | v0.0.0 |
+| [**Micro PLC**](./PLC_STM32/) | Micro PLC based on STM32 microcontroller. | In progress 🟡 | v0.0.0 |
 
 
 ---
